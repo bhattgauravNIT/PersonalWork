@@ -1,0 +1,195 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- Styles moved to app.scss to reduce bundle size and avoid CSS budget errors -->
+
+<main class="main">
+  <div class="content">
+    <div class="left-side">
+      <h1 class="hello-text">Hello, {{ title() }}</h1>
+      <p class="proud-text">I am so proud of you 🎉</p>
+      <div class="image-gallery">
+        <img [src]="currentImage" alt="Megha" class="gallery-image">
+        <button class="gallery-arrow gallery-arrow-left" (click)="prevImage()" aria-label="Previous image">
+          ❮
+        </button>
+        <button class="gallery-arrow gallery-arrow-right" (click)="nextImage()" aria-label="Next image">
+          ❯
+        </button>
+      </div>
+      <div class="music-player-bar">
+        <button class="music-control-btn" (click)="toggleMusic()" aria-label="Toggle music">
+          {{ isPlaying() ? '⏸' : '▶' }}
+        </button>
+        <div class="music-info">
+          <span class="music-title">The Night We Met</span>
+          <div class="progress-container" (click)="onProgressClick($event)">
+            <div class="progress-bar">
+              <div class="progress-fill" [style.width.%]="progress"></div>
+            </div>
+          </div>
+          <div class="time-info">
+            <span class="current-time">{{ formatTime(currentTime()) }}</span>
+            <span class="duration">{{ formatTime(duration()) }}</span>
+          </div>
+        </div>
+      </div>
+      <audio #audioPlayer loop (timeupdate)="onTimeUpdate($event)" (loadedmetadata)="onLoadedMetadata($event)" style="display: none;">
+        <source src="Songs/Lord_Huro_-_The_Night_We_Met_(mp3.pm).mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+    <div class="divider" role="separator" aria-label="Divider"></div>
+    <div class="right-side">
+      <div class="valentine-container">
+        <div class="social-links">
+          <a
+            href="https://www.youtube.com/watch?v=MxIEUzBJn8U&list=RDMxIEUzBJn8U&start_radio=1"
+            aria-label="Youtube"
+            target="_blank"
+            rel="noopener"
+          >
+            <svg
+              width="29"
+              height="20"
+              viewBox="0 0 29 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              alt="Youtube"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M27.4896 1.52422C27.9301 1.96749 28.2463 2.51866 28.4068 3.12258C29.0004 5.35161 29.0004 10 29.0004 10C29.0004 10 29.0004 14.6484 28.4068 16.8774C28.2463 17.4813 27.9301 18.0325 27.4896 18.4758C27.0492 18.9191 26.5 19.2389 25.8972 19.4032C23.6778 20 14.8068 20 14.8068 20C14.8068 20 5.93586 20 3.71651 19.4032C3.11363 19.2389 2.56449 18.9191 2.12405 18.4758C1.68361 18.0325 1.36732 17.4813 1.20683 16.8774C0.613281 14.6484 0.613281 10 0.613281 10C0.613281 10 0.613281 5.35161 1.20683 3.12258C1.36732 2.51866 1.68361 1.96749 2.12405 1.52422C2.56449 1.08095 3.11363 0.76113 3.71651 0.596774C5.93586 0 14.8068 0 14.8068 0C14.8068 0 23.6778 0 25.8972 0.596774C26.5 0.76113 27.0492 1.08095 27.4896 1.52422ZM19.3229 10L11.9036 5.77905V14.221L19.3229 10Z"
+                fill="#FF0000"
+              />
+            </svg>
+          </a>
+        </div>
+        <div class="valentine-question">
+          <p class="valentine-text">Will you be my valentine? 💖</p>
+          <div class="valentine-buttons">
+            <button class="btn-yes" (click)="onYesClick()">Yes! 💕</button>
+            <button class="btn-no" #noButton (mouseenter)="moveNoButton($event)" (click)="onNoClick($event)">No 😢</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+@if (showCelebration()) {
+  <div class="celebration-overlay">
+    <div class="celebration-message">
+      <h1 class="yay-text">🎉 Yay! 🎉</h1>
+      <p class="love-text">I knew you'd say yes! 💕🥰</p>
+    </div>
+    <div class="confetti-container">
+      <div class="confetti">🎉</div>
+      <div class="confetti">🎊</div>
+      <div class="confetti">✨</div>
+      <div class="confetti">💖</div>
+      <div class="confetti">🎉</div>
+      <div class="confetti">🎊</div>
+      <div class="confetti">✨</div>
+      <div class="confetti">💕</div>
+      <div class="confetti">🎉</div>
+      <div class="confetti">🎊</div>
+      <div class="confetti">✨</div>
+      <div class="confetti">💖</div>
+      <div class="confetti">🎉</div>
+      <div class="confetti">🎊</div>
+      <div class="confetti">🎈</div>
+      <div class="confetti">💕</div>
+      <div class="confetti">🎉</div>
+      <div class="confetti">🎊</div>
+      <div class="confetti">✨</div>
+      <div class="confetti">💖</div>
+    </div>
+  </div>
+}
+
+@if (showMessageForm()) {
+  <div class="message-overlay">
+    <div class="message-box">
+      <button class="close-button" (click)="closeMessageForm()">&times;</button>
+      <div class="message-header">
+        <div class="message-avatar">💕</div>
+        <h2 class="message-title">Baby</h2>
+        <p class="message-subtitle">Active now</p>
+      </div>
+      <div class="message-chat-area">
+        <div class="message-bubble">
+          <p class="message-bubble-text">Do you have a message for Gaurav? 💖</p>
+        </div>
+        @if (messageSent()) {
+          <div class="sent-wrapper">
+            <div class="message-bubble sent">
+              <p class="message-bubble-text">{{ userMessage() }}</p>
+            </div>
+            <span class="checkmark delivered">✓✓</span>
+          </div>
+          <div class="confirmation-message">
+            <p class="message-bubble-text">Thanks for your message! 💕 Gaurav will be receiving it shortly and will call you back. He has said I love you!! 😍💖</p>
+          </div>
+        }
+      </div>
+      <div class="message-input-area">
+        @if (!messageSent()) {
+          <div class="input-wrapper">
+            <textarea 
+              #messageInput
+              class="message-textarea" 
+              placeholder="Message..."
+              maxlength="500"
+              rows="1"></textarea>
+            <button class="emoji-button" (click)="toggleEmojiPicker()">😊</button>
+            @if (showEmojiPicker()) {
+              <div class="emoji-picker">
+                <button class="emoji-item" (click)="insertEmoji('❤️', messageInput)">❤️</button>
+                <button class="emoji-item" (click)="insertEmoji('💕', messageInput)">💕</button>
+                <button class="emoji-item" (click)="insertEmoji('💖', messageInput)">💖</button>
+                <button class="emoji-item" (click)="insertEmoji('💗', messageInput)">💗</button>
+                <button class="emoji-item" (click)="insertEmoji('💓', messageInput)">💓</button>
+                <button class="emoji-item" (click)="insertEmoji('💝', messageInput)">💝</button>
+                <button class="emoji-item" (click)="insertEmoji('😍', messageInput)">😍</button>
+                <button class="emoji-item" (click)="insertEmoji('🥰', messageInput)">🥰</button>
+                <button class="emoji-item" (click)="insertEmoji('😘', messageInput)">😘</button>
+                <button class="emoji-item" (click)="insertEmoji('🥺', messageInput)">🥺</button>
+                <button class="emoji-item" (click)="insertEmoji('😊', messageInput)">😊</button>
+                <button class="emoji-item" (click)="insertEmoji('🎉', messageInput)">🎉</button>
+                <button class="emoji-item" (click)="insertEmoji('🌹', messageInput)">🌹</button>
+                <button class="emoji-item" (click)="insertEmoji('💐', messageInput)">💐</button>
+                <button class="emoji-item" (click)="insertEmoji('🌸', messageInput)">🌸</button>
+                <button class="emoji-item" (click)="insertEmoji('✨', messageInput)">✨</button>
+                <button class="emoji-item" (click)="insertEmoji('💫', messageInput)">💫</button>
+                <button class="emoji-item" (click)="insertEmoji('⭐', messageInput)">⭐</button>
+              </div>
+            }
+          </div>
+          <button class="btn-send" (click)="onMessageSubmit(messageInput.value)">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+            </svg>
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+}
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
+<router-outlet />
